@@ -1,0 +1,105 @@
+@layout MainLayout
+@page "/PageContact"
+<div>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="/PageWelcome">Inicio</a></li>
+                <li><a href="/Character">Personajes</a></li>
+                <li><a href="/PageContact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+</div>
+
+<h1>Contacto</h1>
+<div class="container-center">
+<form>
+  <div class="mb-3">
+    <label for="nameInput" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="nameInput" @bind="@ContactName">
+  </div>
+  <div class="mb-3">
+    <label for="emailInput" class="form-label">Correo electrónico</label>
+    <input type="email" class="form-control" id="emailInput" @bind="@ContactEmail">
+  </div>
+  <div class="mb-3">
+    <label for="phoneInput" class="form-label">Número de Teléfono</label>
+    <input type="tel" class="form-control" id="phoneInput" @bind="@ContactPhone">
+  </div>
+  <div class="mb-3">
+    <label for="messageInput" class="form-label">Mensaje</label>
+    <textarea class="form-control" id="messageInput" rows="3" @bind="@ContactMessage"></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" @onclick="SubmitForm">Enviar</button>
+</form>
+
+</div>
+
+
+<hr>
+
+@if (formSubmitted)
+{
+    <p>Hola, soy @ContactName. Quiero contactarme con ustedes por lo siguiente:</p>
+    <p>@ContactMessage</p>
+    <p>Pueden comunicarse conmigo en:</p>
+    <ul>
+        <li>Correo electrónico: @ContactEmail</li>
+        <li>Teléfono: @ContactPhone</li>
+    </ul>
+}
+
+@code {
+    private string? ContactName { get; set; }
+    private string? ContactEmail { get; set; }
+    private string? ContactPhone { get; set; }
+    private string? ContactMessage { get; set; }
+    private bool formSubmitted = false;
+
+    private void SubmitForm()
+    {
+        formSubmitted = true;
+    }
+}
+<style>
+    .nav{
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav li {
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+        color: rgb(0, 255, 255);
+    }
+    body {
+        background-image: url('https://img.freepik.com/vector-gratis/color-blanco-fondo-degradado-abstracto-moderno_343694-2130.jpg');
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+    }
+     .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+      
+    }
+      .form-container {
+        max-width: 800px;
+        width: 100%;
+    }
+</style>

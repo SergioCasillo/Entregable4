@@ -1,0 +1,122 @@
+@page "/Character"
+@inject HttpClient httpClient
+<div>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="/PageWelcome">Inicio</a></li>
+                <li><a href="/Character">Personajes</a></li>
+                <li><a href="/PageContact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+</div>
+<h1>Personajes</h1>
+@if (characters != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Especie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var character in characters.results)
+            {
+                <tr>
+                    <td>@character.name</td>
+                    <td>@character.status</td>
+                    <td>@character.species</td>
+                    <td><a href="/Character-Details/@character.id" target="_blank">Detalles</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Cargando...</p>
+}
+
+@code {
+    private CharacterData characters;
+
+    protected override async Task OnInitializedAsync()
+    {
+        characters = await httpClient.GetFromJsonAsync<CharacterData>("https://rickandmortyapi.com/api/character") ?? new CharacterData();
+    }
+
+    public class CharacterData
+    {
+        public Info info { get; set; }
+        public List<Character> results { get; set; }
+    }
+
+    public class Info
+    {
+        public int count { get; set; }
+        public int pages { get; set; }
+        public string next { get; set; }
+        public string prev { get; set; }
+    }
+
+    public class Character
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string status { get; set; }
+        public string species { get; set; }
+        public string type { get; set; }
+        public string gender { get; set; }
+        public Origin origin { get; set; }
+        public Location location { get; set; }
+        public string image { get; set; }
+        public List<string> episode { get; set; }
+        public string url { get; set; }
+        public string created { get; set; }
+    }
+
+    public class Origin
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Location
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+}
+<style>
+    .nav{
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav li {
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+        color: rgb(0, 255, 255);
+    }
+    body {
+        background-image: url('https://img.freepik.com/vector-gratis/color-blanco-fondo-degradado-abstracto-moderno_343694-2130.jpg');
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+    }
+</style>

@@ -1,0 +1,76 @@
+@layout MainLayout
+@page "/PageWelcome"
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<div>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="/PageWelcome">Inicio</a></li>
+                <li><a href="/Character">Personajes</a></li>
+                <li><a href="/PageContact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+</div>
+<div class="container">
+    <h1>Bienvenidos a la página de Sergio Y Jhoel</h1>
+    <p>Conecta, crea y entrega con Blazor: Tu puerta al desarrollo web moderno</p>
+
+    <h3><PageComponent Name="Las FrikiConsultas" /></h3> 
+</div>
+<style>
+    .nav{
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav li {
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: rgb(241, 235, 235);
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+        color: rgb(0, 255, 255);
+    }
+    body {
+        background-image: url('https://fondosmil.com/fondo/27365.png');
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1 {
+        color: #eeecec; 
+        font-size: 28px;
+    }
+     h3 {
+        color: #eeecec; 
+        font-size: 28px;
+
+        }
+
+    p {
+        color: #49dde2; 
+        font-size: 18px;
+    }
+</style>
+
+
+
+
+@code {
+    [Parameter]
+    public string nombrePagina { get; set; }
+}
+

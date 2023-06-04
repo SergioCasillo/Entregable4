@@ -1,0 +1,90 @@
+@page "/Character-Details/{Id:int}"
+@layout MainLayout
+<div>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="/PageWelcome">Inicio</a></li>
+                <li><a href="/Character">Personajes</a></li>
+                <li><a href="/PageContact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+</div>
+<h1>Detalles del Personaje</h1>
+@if (character?.name != null)
+{
+    <div class="container-center">
+        <h2>@character.name</h2>
+        <p>Estado: @character.status</p>
+        <p>Ubicación: @character.location.name</p>
+        <p>Género: @character.gender</p>
+        <img src="@character.image" alt="@character.name">
+    </div>
+}
+else
+{
+    <p>Cargando...</p>
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    
+
+    private Character character = new Character();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var httpClient = new HttpClient();
+        character = await httpClient.GetFromJsonAsync<Character>($"https://rickandmortyapi.com/api/character/{Id}") ?? new Character();
+    }
+
+    public class Character
+    {
+        public string? name { get; set; }
+        public string? status { get; set; }
+        public Location? location { get; set; }
+        public string? gender { get; set; }
+        public string? image { get; set; }
+    }
+
+    public class Location
+    {
+        public string? name { get; set; }
+        public string? url { get; set; }
+    }
+}
+
+<style>
+    .nav{
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav li {
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: rgb(241, 235, 235);
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+        color: rgb(0, 255, 255);
+    }
+    body {
+        background-image: url('https://img.freepik.com/vector-gratis/color-blanco-fondo-degradado-abstracto-moderno_343694-2130.jpg');
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+    }
+    </style>

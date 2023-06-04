@@ -1,0 +1,47 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<div>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="/PageWelcome">Inicio</a></li>
+                <li><a href="/Character">Personajes</a></li>
+                <li><a href="/PageContact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+</div>
+
+<h1 style="color: white;">Proyecto Blazor</h1>
+<style>
+    .nav{
+        display: flex;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav li {
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: rgb(241, 235, 235);
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+        color: rgb(0, 255, 255);
+    }
+    body {
+        background-image: url('https://fondosmil.com/fondo/27365.png');
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
